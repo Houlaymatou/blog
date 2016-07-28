@@ -132,28 +132,4 @@ class Comment
 
         return $this;
     }
-
-    /**
-     * Set user
-     *
-     * @param string $user
-     *
-     * @return Comment
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

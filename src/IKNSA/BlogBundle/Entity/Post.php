@@ -75,15 +75,14 @@ class Post
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="IKNSA\BlogBundle\Entity\Comment")
+     * @ORM\OneToMany(targetEntity="IKNSA\BlogBundle\Entity\Comment", mappedBy="post")
      */
      protected $comment;
-
-
 
     public function __construct()
     {
         $this->createdAt = new \Datetime;
+        $this->comment = new ArrayCollection();
     }
     /**
      * Get id
@@ -320,5 +319,39 @@ class Post
     
     public function getImage(){
          return $this->id . '.' . $this->extension;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \IKNSA\BlogBundle\Entity\Comment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\IKNSA\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \IKNSA\BlogBundle\Entity\Comment $comment
+     */
+    public function removeComment(\IKNSA\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

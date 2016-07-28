@@ -77,12 +77,24 @@ class PostController extends Controller
     {  
         //dump($post);die();
         $em = $this->getDoctrine()->getManager();
+        $comments = $em->getRepository('IKNSABlogBundle:Comment')
+                   ->getCommentsForPost($post->getId());
         $comment = new Comment;
-        $commentForm = $this->createForm('IKNSA\BlogBundle\Form\CommentType', $comment);
-        $commentForm->handleRequest($request);
+        $form = $this->createForm('IKNSA\BlogBundle\Form\CommentType', $comment);
+        $form->handleRequest($request);
+         if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+        }
+
         $deleteForm = $this->createDeleteForm($post);
         return $this->render('IKNSABlogBundle:post:show.html.twig', array(
             'post' => $post,
+            'comments' => $comments,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
 

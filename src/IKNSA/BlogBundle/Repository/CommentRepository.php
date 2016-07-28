@@ -10,4 +10,12 @@ namespace IKNSA\BlogBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function getCommentsForPost($postId)
+    {
+        $qb = $this->createQueryBuilder('c')
+                   ->select('c')
+                   ->where('c.post = :post_id')
+                   ->addOrderBy('c.createdAt')
+                   ->setParameter('post_id', $postId);
+ }
 }
