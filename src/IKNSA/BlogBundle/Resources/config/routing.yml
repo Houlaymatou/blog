@@ -16,4 +16,8 @@ blog_api_post:
   defaults: { _controller: "IKNSABlogBundle:Post:apiIndex" }
 
 
+blog_api_comment_post:
+  path:     /api/post/{id}
+  defaults: { _controller: "IKNSABlogBundle:Post:apiShow" }
+
   

@@ -40,6 +40,26 @@ class PostController extends Controller
         return new JsonResponse(array(
             'posts' => $posts));
     }
+
+    /**
+     * Lists all Comment entities.
+     *
+     */
+    public function apiShowAction(Post $post){
+        $em = $this->getDoctrine()->getManager();
+        $comments = $em->getRepository('IKNSABlogBundle:Comment')
+                   ->getCommentsForPost($post->getId());
+        return new JsonResponse(array(
+            'post' => array(
+                "title" => $post->getTitle(),
+                "summary" => $post->getSummary(),
+                "content" => $post->getContent(),
+                "createdAt" => $post->getCreatedAt(),
+                "user" => $post->setUser(),
+            ),
+            'comments' => $comments
+        ));
+    }
     /**
      * Creates a new Post entity.
      *
