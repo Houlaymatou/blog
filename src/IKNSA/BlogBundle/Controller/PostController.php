@@ -79,11 +79,16 @@ class PostController extends Controller
         $em = $this->getDoctrine()->getManager();
         $comments = $em->getRepository('IKNSABlogBundle:Comment')
                    ->getCommentsForPost($post->getId());
+
         $comment = new Comment;
+
         $form = $this->createForm('IKNSA\BlogBundle\Form\CommentType', $comment);
         $form->handleRequest($request);
          if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $comment->setUser($user);
+            $comment->setPost($post);
             $em->persist($comment);
             $em->flush();
 

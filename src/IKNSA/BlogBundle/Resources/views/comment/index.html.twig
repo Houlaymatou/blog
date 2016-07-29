@@ -12,7 +12,14 @@
             <tr>
                 <td>{{ comment.user }}</td>
                 <td>{{ comment.comment }}</td>
-                <td>{% if comment.createdAt %}{{ comment.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if comment.createdAt %}{{ comment.createdAt|date('d-m-y') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('comment_edit', { 'id': comment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

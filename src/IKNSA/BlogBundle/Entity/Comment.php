@@ -35,7 +35,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="IKNSA\BlogBundle\Entity\Post")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * 
      */
      protected $post;
 
