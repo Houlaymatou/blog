@@ -12,7 +12,7 @@
             <tr>
                 <td>{{ comment.user }}</td>
                 <td>{{ comment.comment }}</td>
-                <td>{% if comment.createdAt %}{{ comment.createdAt|date('d-m-y') }}{% endif %}</td>
+                <td>{{ comment.createdAt|date('d-m-y') }}</td>
                 <td>
                     <ul>
                         <li>

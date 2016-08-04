@@ -12,7 +12,7 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
   public function getCommentsForPost($post)
     {
-        return $this->getEntityManager()->createQuery("SELECT c.id, c.comment, c.user FROM IKNSABlogBundle:Comment c JOIN c.post p WHERE p = $post ORDER BY c.id DESC")
+        return $this->getEntityManager()->createQuery("SELECT c.id, c.comment, c.createdAt, c.user FROM IKNSABlogBundle:Comment c JOIN c.post p WHERE p = $post ORDER BY c.id DESC")
 		->getResult();
  	}
 }
